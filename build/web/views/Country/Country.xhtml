@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../Plantilla/templateBase.xhtml">
+
+            <ui:define name="content">
+                <h1>Paises</h1>
+                
+               <h:form>
+                   <p:commandButton value="Agregar Pais" actionListener="#{countryBean.preparePais()}"
+                                     oncomplete="PF('dialogNuevoPais').show()"
+                                     update="formNuevoPais"/>
+                </h:form>
+
+                <h:form id="formListaPaises">
+                    <p:dataTable id="tablaPaises" paginator="true" paginatorPosition="top"
+                                 var="ciudad" value="#{countryBean.paises}">
+                        <p:column headerText="ID">
+                            <h:outputText value="#{pais.id}"/>
+                        </p:column>
+                        <p:column headerText="Nombre Ciudad">
+                            <h:outputText value="#{ciudad.name}"/>
+                        </p:column>
+                        <p:column headerText="Distrito">
+                            <h:outputText value="#{ciudad.district}"/>
+                        </p:column>
+                        <p:column headerText="Poblacion">
+                            <h:outputText value="#{ciudad.population}"/>
+                        </p:column>
+                        <p:column headerText="Modificar">
+                            <p:commandButton value="Modificar" oncomplete="PF('dialogModificarCiudad').show()" update="formModificarCiudad">
+                                <f:setPropertyActionListener target="#{cityBean.ciudad}" value="#{ciudad}"/>
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Elimiar" >
+                            <p:commandButton value="Eliminar" oncomplete="PF('dialogEliminarCiudad').show()"
+                                             update="formEliminarCiudad" >  
+                            <f:setPropertyActionListener target="#{cityBean.ciudad}" value="#{ciudad}" /> 
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+
+                <h:form id="formNuevaCiudad">
+                    <p:dialog id="dlgNuevaCiudad" widgetVar="dialogNuevaCiudad" resizable="flase" showEffect="explode" hideEffect="explode" modal="true">
+                        <p:panelGrid columns="2" style="margin:0 auto">
+                            <p:outputLabel value="Nombre Ciudad"/>
+                            <p:inputText value="#{cityBean.ciudad.name}"/>
+
+                            <p:outputLabel value="Distrito"/>
+                            <p:inputText value="#{cityBean.ciudad.district}"/>
+
+                            <p:outputLabel value="Poblacion"/>
+                            <p:inputText value="#{cityBean.ciudad.population}"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Guardar" actionListener="#{cityBean.insertCiudad()}" 
+                                         update="formListaCiudades:tablaCiudades" 
+                                         oncomplete="PF('dialogNuevaCiudad').hide()"/>
+                        <p:commandButton value="Cancelar" oncomplete="PF('dialogNuevaCiudad').hide()"/>
+                    </p:dialog>
+                </h:form>
+
+                <h:form id="formModificarCiudad">
+                    <p:dialog id="dlgModificarCliente" widgetVar="dialogModificarCiudad" resizable="flase" showEffect="explode" hideEffect="explode" modal="true">
+                        <p:panelGrid columns="2" style="margin:0 auto">
+                            <p:outputLabel value="Nombre Ciudad"/>
+                            <p:inputText value="#{cityBean.ciudad.name}"/>
+
+                            <p:outputLabel value="Distrito"/>
+                            <p:inputText value="#{cityBean.ciudad.district}"/>
+
+                            <p:outputLabel value="Poblacion"/>
+                            <p:inputText value="#{cityBean.ciudad.population}"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Guardar" actionListener="#{cityBean.updateCiudad()}" 
+                                         update="formListaCiudades:tablaCiudades" 
+                                         oncomplete="PF('dialogModificarCiudad').hide()"/>
+                        <p:commandButton value="Cancelar" oncomplete="PF('dialogModificarCiudad').hide()"/>
+                    </p:dialog>
+                </h:form>
+
+                <h:form id="formEliminarCiudad">
+                    <p:dialog id="dlgEliminarCiudad" widgetVar="dialogEliminarCiudad" resizable="false" showEffect="explode" hideEffect="explode" modal="true">
+                        <h:outputText value="Desea eliminar la ciudad"/>
+                        <p:commandButton value="SI" actionListener="#{cityBean.deleteCiudad()}" 
+                                         update="formListaCiudades:tablaCiudades" 
+                                         oncomplete="PF('dialogEliminarCiudad').hide()"/>
+                        <p:commandButton value="NO" oncomplete="PF('dialogEliminarCiudad').hide()"/>
+                    </p:dialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

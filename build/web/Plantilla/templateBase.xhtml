@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Ciudades del mundo</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top"></ui:insert>
+            <h1>EXPLORAR CIUDADES</h1>
+            <div class="card">
+                <h:form>
+                    <p:growl id="messages"/>
+
+                    <p:menubar>
+                        <p:submenu label="Inicio" icon="pi pi-fw pi-file">
+                            <p:menuitem value="Pagina de inicio" icon="pi pi-fw pi-trash" outcome="/views/Bienvenido"/>
+                            <p:divider />
+                            <p:menuitem value="Salir" icon="pi pi-fw pi-external-link" action="#{loginBean.logout()}"/>
+                        </p:submenu>
+
+                        <p:submenu label="Ciudad" icon="pi pi-fw pi-pencil">
+                            <p:menuitem value="Ver y Editar" outcome="/views/City/City" icon="pi pi-fw pi-align-left"/>
+                        </p:submenu>
+
+                        <p:submenu label="Paìs" icon="pi pi-fw pi-user">
+                            <p:menuitem value="Ver y Editar" outcome="/views/Country/Country" icon="pi pi-fw pi-user-plus"/>     
+                        </p:submenu>
+
+                    </p:menubar>
+                </h:form>
+            </div>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom">
+            <ui:insert name="bottom">&copy;2023 JavaITSQMET</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

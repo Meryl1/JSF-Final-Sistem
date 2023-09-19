@@ -1,0 +1,21 @@
+body{
+    background-color: white;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color:purple;
+    margin: 10px;
+    text-align: center; 
+    
+    }
+    .login{
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 4%;
+        font-size:  11px;        
+    }
+    .image{
+        text-align: left; /* Centra la imagen horizontalmente */
+        margin-top: 10px; /* Espacio superior para separar la imagen del contenido */
+    }
+    
